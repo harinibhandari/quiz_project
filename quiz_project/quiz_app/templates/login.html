@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Engineer Login</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #A7C5BD, #E2D3C7); /* Pastel Green to Light Beige */
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background-image 1s ease-in-out;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1603721701123-c47e71ddc7ba?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: 0;
+      filter: grayscale(40%);
+      transition: opacity 1s ease-in-out;
+    }
+
+    body:hover::before {
+      opacity: 0.4;
+      background-image: url('https://images.unsplash.com/photo-1516452963663-5e064b5cd0f4?auto=format&fit=crop&w=500&q=80');
+    }
+
+    .login-box {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      animation: slideFade 1s ease-in-out;
+    }
+
+    @keyframes slideFade {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: #333; /* Dark grey for a sharp contrast */
+      font-size: 38px;
+      margin-bottom: 20px;
+      font-family: 'Dancing Script', cursive;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0 20px;
+      border: none;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #333;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: 2px solid #333;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #FF7F50, #FF6347);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #FF6347, #FF7F50);
+    }
+
+    p {
+      color: #FF6347;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 14px;
+      color: #333; /* Dark color for "Future Engineers Build Here 🚀" */
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 450px) {
+      .login-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Roboto:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-box">
+    <h2>Engineer Portal</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      {% if error %}<p>{{ error }}</p>{% endif %}
+    </form>
+    <div class="note">Future Engineers Build Here 🚀</div>
+  </div>
+</body>
+</html>

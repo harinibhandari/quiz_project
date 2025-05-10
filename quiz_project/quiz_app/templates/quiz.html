@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz: {{ subject.name }}</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'YourCustomFont', sans-serif; /* Keep your unique font */
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #cfe8cc, #fdf6e3); /* pastel green to light beige */
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1603721701123-c47e71ddc7ba?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+      z-index: 0;
+      filter: grayscale(50%);
+    }
+
+    .quiz-box {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 25px;
+      width: 90%;
+      max-width: 750px;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2C3E50;
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    form {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .question {
+      font-size: 16px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #34495E;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .options label {
+      color: #2c3e50;
+      font-weight: 400;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: #2C3E50;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1f2e3d;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 14px;
+      color: #2C3E50;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 450px) {
+      .quiz-box {
+        padding: 20px 15px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-box">
+    <h2>Quiz: {{ subject.name }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for q in questions %}
+        <div class="question">
+          <p>{{ q.text }}</p>
+        </div>
+        <div class="options">
+          <label><input type="radio" name="{{ q.id }}" value="A"> {{ q.option_a }}</label>
+          <label><input type="radio" name="{{ q.id }}" value="B"> {{ q.option_b }}</label>
+          <label><input type="radio" name="{{ q.id }}" value="C"> {{ q.option_c }}</label>
+          <label><input type="radio" name="{{ q.id }}" value="D"> {{ q.option_d }}</label>
+        </div>
+      {% endfor %}
+      <button type="submit">Submit</button>
+    </form>
+    <div class="note">All the best!</div>
+  </div>
+</body>
+</html>

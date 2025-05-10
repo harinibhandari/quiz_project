@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #d9fdd3, #f5f5dc);
+            background-attachment: fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background image with opacity */
+        body::before {
+            content: "";
+            background-image: url('https://www.transparenttextures.com/patterns/connected.png');
+            opacity: 0.15;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .result-box {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 420px;
+            margin: 100px auto;
+        }
+
+        .emoji {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .percentage {
+            font-size: 20px;
+            color: #444;
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #88c788;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: #6fb26f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="result-box">
+    {% if percentage >= 90 %}
+        <div class="emoji">🏆</div>
+        <div class="score">Excellent! You scored {{ score }} out of {{ total }}</div>
+    {% elif percentage >= 75 %}
+        <div class="emoji">😊</div>
+        <div class="score">Great job! You scored {{ score }} out of {{ total }}</div>
+    {% elif percentage >= 50 %}
+        <div class="emoji">🙂</div>
+        <div class="score">Good effort! You scored {{ score }} out of {{ total }}</div>
+    {% else %}
+        <div class="emoji">😢</div>
+        <div class="score">Better luck next time! You scored {{ score }} out of {{ total }}</div>
+    {% endif %}
+
+    <div class="percentage">Percentage: {{ percentage }}%</div>
+    <a href="{% url 'subjects' %}" class="back-btn">Back to Subjects</a>
+</div>
+
+</body>
+</html>
