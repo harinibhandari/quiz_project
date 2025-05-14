@@ -1,5 +1,0 @@
- mvn archetype:generate \
--DgroupId=com.example.app \
--DartifactId=myapp \
--DarchetypeArtifactId=maven-archetype-quickstart \
--DinteractiveMode=false
